@@ -1,15 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    compileSdk 31
+    compileSdk 28
 
     defaultConfig {
         applicationId "com.bruceprw.scranshouts"
         minSdk 28
-        targetSdk 29
+        targetSdk 28
         versionCode 1
         versionName "1.0"
 
@@ -40,5 +41,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'net.steamcrafted:materialiconlib:1.1.5'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-common-ktx:20.0.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

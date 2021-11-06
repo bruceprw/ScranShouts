@@ -22,6 +22,11 @@
     <string name="login_email">Email:</string>
     <string name="login_pwd">Password:</string>
     <string name="confirm_pwd">Confirm Password:</string>
+    <string name="register_pwd_toast">Passwords do not match, try again!</string>
+    <string name="register_failure_toast">Registration Failed, please try again!</string>
+    <string name="login_failure_toast">Login Failed, please try again!</string>
+    <string name="login_success_toast">Login Success!</string>
+
 
 <!-- Strings for review creation page  -->
     <string name="cancel">Cancel</string>
