@@ -1,6 +1,7 @@
 package com.bruceprw.scranshouts
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
@@ -14,7 +15,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
+import org.json.JSONObject
 
 class activity_register : AppCompatActivity()
 {
@@ -22,7 +28,8 @@ class activity_register : AppCompatActivity()
 
 
     private var mAuth = FirebaseAuth.getInstance()
-
+    private var database = Firebase.database.reference
+    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +39,12 @@ class activity_register : AppCompatActivity()
         val passwordInput1 = findViewById<EditText>(R.id.register_password)
         val passwordInput2 = findViewById<EditText>(R.id.confirm_password)
 
+        testDBRead()
         registerButton.setOnClickListener{ view ->
             val email = emailInput.text.toString()
             val pass1 = passwordInput1.text.toString()
             val pass2 = passwordInput2.text.toString()
-
+//            createUser(email)
             if (pass1 == pass2) {
                 createAccount(view, email, pass1)
         }
@@ -57,16 +65,17 @@ class activity_register : AppCompatActivity()
     }
 
     private fun createAccount(view: View, email: String, password: String) {
-// [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-// Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = mAuth.currentUser
+                    createUser(email)
                     updateUI(user)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+
                 } else {
-// If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     showMessage(view, getString(R.string.register_failure_toast))
                     updateUI(null)
@@ -86,6 +95,53 @@ class activity_register : AppCompatActivity()
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    private fun createUser(email: String) {
+        database.child("users").child("nextUID").child("value").get().addOnSuccessListener {
+            val uidLong = it.value as Long
+            val uid = uidLong.toInt()
+            val uidString = uid.toString()
+            val user = constructNewUserJSON(uid, email)
+            database.child("users").child(uidString).setValue(user)
+
+        }
+    }
+
+    private fun constructNewUserJSON(uid: Int, email: String) : User {
+        val email = email
+        val name = email
+        val picURL = "https://imgur.com/a/RBs4IxQ"
+        val uid = uid
+        val xp = 0
+        val user = User(email, name, picURL, uid, xp)
+        val userJSON = gson.toJson(user)
+//        val userJSON = JSONObject("{'email' : '$email', 'name' : '$email', 'picURL' : '$picURL', 'uid' = '$uid'," +
+//                " 'xp' : '$xp'}")
+        database.child("users").child("nextUID").child("value").setValue(uid+1)
+        return user
+
+//        "u0001" : {
+//            "email" : "test@test.com",
+//            "name" : "test@test.com",
+//            "picUrl" : "https://image.com/image123",
+//            "uid" : 1,
+//            "xp" : 1
+//        }
+    }
+
+    private fun testDBRead() {
+        val uid = database.child("users").child("nextUID").child("value").get().addOnSuccessListener {
+            Log.i(TAG,"UID for new user: ${it.value}")
+
+        }
+
+
+
+    }
+
+    private fun formatJSON() {
+
     }
 
     companion object {

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "706755234890",
+    "firebase_url": "https://scranshouts-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "scranshouts",
+    "storage_bucket": "scranshouts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706755234890:android:3bc7cdbb3e32a491e7eab3",
+        "android_client_info": {
+          "package_name": "com.bruceprw.scranshouts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706755234890-85g2rm6gscm5l9usf9uie9mdgija7d2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFe_ZSBs5GKVx4-HW_-jMKYqWV7RKO6D0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706755234890-85g2rm6gscm5l9usf9uie9mdgija7d2m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

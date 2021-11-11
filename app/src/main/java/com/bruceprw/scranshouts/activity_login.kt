@@ -1,6 +1,7 @@
 package com.bruceprw.scranshouts
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
@@ -41,6 +42,8 @@ class activity_login : AppCompatActivity()
                     val user = mAuth.currentUser
                     closeKeyboard()
                     showMessage(view, getString(R.string.login_success_toast))
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 }
                 else {
                     closeKeyboard()
