@@ -21,6 +21,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import org.json.JSONObject
+import java.util.*
 
 class activity_register : AppCompatActivity()
 {
@@ -39,12 +40,10 @@ class activity_register : AppCompatActivity()
         val passwordInput1 = findViewById<EditText>(R.id.register_password)
         val passwordInput2 = findViewById<EditText>(R.id.confirm_password)
 
-        testDBRead()
         registerButton.setOnClickListener{ view ->
             val email = emailInput.text.toString()
             val pass1 = passwordInput1.text.toString()
             val pass2 = passwordInput2.text.toString()
-//            createUser(email)
             if (pass1 == pass2) {
                 createAccount(view, email, pass1)
         }
@@ -98,53 +97,29 @@ class activity_register : AppCompatActivity()
     }
 
     private fun createUser(email: String) {
-        database.child("users").child("nextUID").child("value").get().addOnSuccessListener {
-            val uidLong = it.value as Long
-            val uid = uidLong.toInt()
-            val uidString = uid.toString()
-            val user = constructNewUserJSON(uid, email)
-            database.child("users").child(uidString).setValue(user)
 
-        }
+        val uid = UUID.randomUUID()
+        val uidString = uid.toString()
+        val user = constructNewUserObject(uidString, email)
+        database.child("users").child(uidString).setValue(user)
+
     }
 
-    private fun constructNewUserJSON(uid: Int, email: String) : User {
+    private fun constructNewUserObject(uid: String, email: String) : User {
         val email = email
         val name = email
         val picURL = "https://imgur.com/a/RBs4IxQ"
         val uid = uid
         val xp = 0
-        val user = User(email, name, picURL, uid, xp)
-        val userJSON = gson.toJson(user)
-//        val userJSON = JSONObject("{'email' : '$email', 'name' : '$email', 'picURL' : '$picURL', 'uid' = '$uid'," +
-//                " 'xp' : '$xp'}")
-        database.child("users").child("nextUID").child("value").setValue(uid+1)
+        val reviewList = arrayListOf<Int>()
+        val user = User(email, name, picURL, uid, xp, reviewList)
         return user
 
-//        "u0001" : {
-//            "email" : "test@test.com",
-//            "name" : "test@test.com",
-//            "picUrl" : "https://image.com/image123",
-//            "uid" : 1,
-//            "xp" : 1
-//        }
     }
 
-    private fun testDBRead() {
-        val uid = database.child("users").child("nextUID").child("value").get().addOnSuccessListener {
-            Log.i(TAG,"UID for new user: ${it.value}")
-
-        }
-
-
-
-    }
-
-    private fun formatJSON() {
-
-    }
-
-    companion object {
-        private const val TAG = "EmailPassword"
-    }
+companion object {
+    private const val TAG = "RegisterUser"
 }
+    }
+
+
