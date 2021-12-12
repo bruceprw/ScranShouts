@@ -16,19 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_text_only" />
 
-    <EditText
-        android:id="@+id/restaurant_name_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/Restaurant"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/review_title_in" />
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/review_title_in"
         android:layout_width="wrap_content"
@@ -36,8 +23,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Enter Review Title"
-        android:inputType="textPersonName"
+        android:hint="@string/Review_name"
+        android:inputType="textPersonName|text"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_review_logo" />
@@ -47,26 +34,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="53dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/Review"
         android:inputType="textMultiLine"
+        android:maxHeight="50dp"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_in" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_spinner" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
         android:stepSize="1"
         android:valueFrom="0.0"
         android:valueTo="5.0"
+        app:layout_constraintBottom_toTopOf="@+id/cancel_review_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rating_slider_text"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
@@ -74,20 +62,20 @@
         android:layout_width="128dp"
         android:layout_height="54dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="50dp"
         android:text="@string/cancel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slider" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/publish_review_button"
         android:layout_width="128dp"
         android:layout_height="54dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="50dp"
         android:text="@string/Post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slider" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -104,43 +92,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="105dp"
         android:text="@string/Rating"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/review_body_in" />
 
-    <ImageButton
-        android:id="@+id/create_review_back_arrow"
-        android:layout_width="53dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:background="@null"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_arrow_back_white_24dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <Button
-        android:id="@+id/inflate_ratings_button"
+        android:id="@+id/review_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="17dp"
-        android:text="@string/Detailed_Ratings"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Add_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/review_body_in" />
 
-    <Button
-        android:id="@+id/add_img_button"
+    <TextView
+        android:id="@+id/selectRestView"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/Restaurant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_title_in" />
+
+    <Spinner
+        android:id="@+id/restaurant_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="72dp"
-        android:text="@string/Add_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/review_body_in" />
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
+        android:prompt="@string/Restaurant"
+        android:spinnerMode="dialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectRestView" />
+
+    <ImageView
+        android:id="@+id/review_image_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="31dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/review_image_button"
+        app:layout_constraintTop_toBottomOf="@+id/review_body_in"
+        app:srcCompat="@drawable/tick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

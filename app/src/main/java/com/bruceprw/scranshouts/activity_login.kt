@@ -4,17 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class activity_login : AppCompatActivity()
 {
@@ -39,10 +34,11 @@ class activity_login : AppCompatActivity()
             .addOnCompleteListener(this) {
                 task ->
                 if (task.isSuccessful) {
-                    val user = mAuth.currentUser
+                    val user = mAuth.currentUser!!.displayName
                     closeKeyboard()
                     showMessage(view, getString(R.string.login_success_toast))
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, activity_main_feed::class.java)
+                    intent.putExtra("user", user)
                     startActivity(intent)
                 }
                 else {
@@ -64,9 +60,4 @@ class activity_login : AppCompatActivity()
     private fun showMessage(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
     }
-    public override fun onStart() {
-        super.onStart()
-
-    }
-
 }

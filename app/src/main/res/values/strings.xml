@@ -1,14 +1,6 @@
 <resources>
     <string name="app_name">ScranShouts</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <!-- Strings used for Welcome Screen -->
 
@@ -27,16 +19,44 @@
     <string name="login_failure_toast">Login Failed, please try again!</string>
     <string name="login_success_toast">Login Success!</string>
 
+<!-- Strings for main feed-->
+    <string name="guest_message">You must be signed in to do this! (Use the green button)</string>
 
 <!-- Strings for review creation page  -->
     <string name="cancel">Cancel</string>
     <string name="Post">Post</string>
     <string name="Rating">Rate your experience overall:</string>
-    <string name="Restaurant">Restaurant name:</string>
+    <string name="Restaurant">Select Restaurant:</string>
+    <string name="Review_name">Enter Review Name:</string>
     <string name="Review">Enter Review!</string>
     <string name="Add_image">Image</string>
     <string name="Detailed_Ratings">Ratings</string>
+    <string name="Review_error">Error whilst posting review, please try again!</string>
+    <string name="Other_Est">You can only review restaurants that have signed up for ScranShouts. We are working on expanding our partners everyday!</string>
+    <string name="other">Other</string>
+    <string name="select_restaurant">Select a Restaurant:</string>
+    <string name="no_selection_message">You must select a restaurant to continue!</string>
+    <string name="review_length_message">Your review text must be no more than 300 characters!</string>
+<!-- Strings for profile page  -->
+    <string name="profile_xp">My XP:</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_reviews">My Reviews</string>
+    <string name="log_out">Log out</string>
+    <string name="sign_out_message">Signed out!</string>
 
+<!-- Strings for edit profile page-->
+    <string name="username">Username</string>
+    <string name="profile_image_button_label">Edit Profile Picture</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="username_length_warning">Username must be less than 40 characters</string>
+
+<!--Strings for review page-->
+    <string name="XP">Give XP!</string>
+    <string name="xp_label">Author XP:</string>
+    <string name="rating_label">Rating:</string>
+    <string name="self_xp_message">You cannot give yourself XP!</string>
+    <string name="multiple_xp_message">You can only give XP once per session!</string>
+    <string name="guest_xp_message">You must be signed in to give XP!</string>
 <!--    Dummy Strings -->
     <string name="dummy_name">ScranShouts cafe</string>
     <string name="dummy_title">Best cafe EVER (almost)</string>

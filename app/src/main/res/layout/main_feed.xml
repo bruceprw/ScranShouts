@@ -30,14 +30,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/navbar_loc_button"
+        android:id="@+id/navbar_sort_button"
         android:layout_width="67dp"
         android:layout_height="50dp"
         android:layout_marginTop="3dp"
         android:background="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/main_feed_navbar"
         app:layout_constraintTop_toBottomOf="@+id/main_feed_recycler"
-        app:srcCompat="@drawable/baseline_location_on_white_24dp"
+        app:srcCompat="@drawable/ic_baseline_sort_24"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
@@ -61,5 +61,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_feed_recycler"
         app:srcCompat="@drawable/baseline_person_white_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/guest_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="328dp"
+        android:layout_marginTop="588dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_edit_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

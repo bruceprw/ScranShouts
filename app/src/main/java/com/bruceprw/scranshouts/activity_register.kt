@@ -9,19 +9,13 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
-import org.json.JSONObject
-import java.util.*
+import java.util.UUID
 
 class activity_register : AppCompatActivity()
 {
@@ -30,7 +24,6 @@ class activity_register : AppCompatActivity()
 
     private var mAuth = FirebaseAuth.getInstance()
     private var database = Firebase.database.reference
-    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,10 +61,11 @@ class activity_register : AppCompatActivity()
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "createUserWithEmail:success")
-                    val user = mAuth.currentUser
-                    createUser(email)
-                    updateUI(user)
-                    val intent = Intent(this, MainActivity::class.java)
+                    val user = mAuth.currentUser!!
+                    createUser(email, user.uid)
+                    //updateUI(user)
+                    val intent = Intent(this, activity_main_feed::class.java)
+                    intent.putExtra("user", user)
                     startActivity(intent)
 
                 } else {
@@ -96,12 +90,10 @@ class activity_register : AppCompatActivity()
         }
     }
 
-    private fun createUser(email: String) {
+    private fun createUser(email: String, uid: String) {
 
-        val uid = UUID.randomUUID()
-        val uidString = uid.toString()
-        val user = constructNewUserObject(uidString, email)
-        database.child("users").child(uidString).setValue(user)
+        val user = constructNewUserObject(uid, email)
+        database.child("users").child(uid).setValue(user)
 
     }
 
@@ -111,11 +103,11 @@ class activity_register : AppCompatActivity()
         val picURL = "https://imgur.com/a/RBs4IxQ"
         val uid = uid
         val xp = 0
-        val reviewList = arrayListOf<Int>()
+        val reviewList = mutableListOf<String>()
         val user = User(email, name, picURL, uid, xp, reviewList)
         return user
-
     }
+
 
 companion object {
     private const val TAG = "RegisterUser"
